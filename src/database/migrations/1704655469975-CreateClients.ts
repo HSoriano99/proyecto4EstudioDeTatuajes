@@ -32,7 +32,7 @@ export class CreateClients1704655469975 implements MigrationInterface {
           {
             name: "phone_number",
             type: "varchar",
-            length: "40",
+            length: "50",
             isNullable: true,
           },
         ],
