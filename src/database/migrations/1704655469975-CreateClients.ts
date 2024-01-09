@@ -41,6 +41,7 @@ export class CreateClients1704655469975 implements MigrationInterface {
             columnNames: ["user_id"],
             referencedTableName: "users",
             referencedColumnNames: ["id"],
+            onDelete: "CASCADE"
           },
         ],
       }),
