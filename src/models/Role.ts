@@ -12,7 +12,7 @@ role_name!: string
 // 1:N con User
 @OneToMany(() => User, (user) => user.role)
 
-users!: User[];
+user!: User[];
  
 
 }
