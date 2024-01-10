@@ -27,9 +27,9 @@ export class User extends BaseEntity {
    @OneToOne(() => Client, (client) => client.user)
    client?: Client;
 
-    // 1:1 con Artists PENDIENTE
-    @OneToOne(() => blabla, (blabla) => blabla.user)
-    teacher?: Teacher;
+    // 1:1 con Artists 
+    @OneToOne(() => Artist, (artist) => artist.user)
+    artist?: Artist;
  }
   
 

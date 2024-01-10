@@ -3,8 +3,8 @@ import { Role } from "./Role"
 import { User } from "./User"
 import { Appointment } from "./Appointment"
 
-@Entity("clients")
-export class Client extends BaseEntity {
+@Entity("artists")
+export class Artist extends BaseEntity {
 
     @PrimaryGeneratedColumn()
     id!: number
@@ -18,8 +18,11 @@ export class Client extends BaseEntity {
     @Column()
     phone_number!: string
 
+    @Column()
+    tattoo_style!: string
+
     // 1:1 con User 
-    @OneToOne(() => User, (user) => user.client)
+    @OneToOne(() => User, (user) => user.artist)
     @JoinColumn({name: "user_id"})
     user!: User;
 
@@ -30,4 +33,3 @@ export class Client extends BaseEntity {
 
 
  }
-  
