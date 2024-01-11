@@ -7,9 +7,10 @@ import {
   JoinColumn,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { Role } from "./Role";
+
 import { User } from "./User";
 import { Appointment } from "./Appointment";
+import { Design } from "./Design";
 
 @Entity("artists")
 export class Artist extends BaseEntity {
@@ -36,4 +37,11 @@ export class Artist extends BaseEntity {
   // 1:N con Appointment
   @OneToMany(() => Appointment, (appointment) => appointment.artist)
   appointment!: Appointment;
+
+  //1:N con Designs
+  @OneToMany(() => Design, (design) => design.artist)
+  design!: Design;
+
+
+
 }
