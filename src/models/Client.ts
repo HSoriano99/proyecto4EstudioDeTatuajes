@@ -1,4 +1,4 @@
-import { BaseEntity, Column, Entity, OneToOne, ManyToOne, JoinColumn, PrimaryGeneratedColumn } from "typeorm"
+import { BaseEntity, Column, Entity, OneToOne, ManyToOne, JoinColumn, PrimaryGeneratedColumn, OneToMany } from "typeorm"
 import { Role } from "./Role" 
 import { User } from "./User"
 import { Appointment } from "./Appointment"
@@ -23,10 +23,9 @@ export class Client extends BaseEntity {
     @JoinColumn({name: "user_id"})
     user!: User;
 
-     // 1:N con Appointment PENDIENTE
-    //  @ManyToOne(() => Role, (role) => role.users)
-    //  @JoinColumn ({name: "role_id"})
-    //  role!: Role;
+     // 1:N con Appointment 
+     @OneToMany(() => Appointment, (appointment) => appointment.client)
+     appointment!: Appointment;
 
 
  }
