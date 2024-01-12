@@ -37,20 +37,28 @@ export const seedUsersWithRoles = async ({
    roles,
    count,
 }: {
-   roles: Role[];
+   roles: Role[] ;
    count: number;
 }) => {
+
+   console.log(roles);
    // Obtener repositorios y fábricas necesarios
    const userRepository = AppDataSource.getRepository(User);
    const userFactory = new UserFactory(userRepository);
 
+   const roleRepository = AppDataSource.getRepository(Role);
+   let rolesData = await roleRepository.find();
+
    // Generar usuarios
    const users = userFactory.createMany(count);
+   console.log(rolesData[0]);
 
    // Asignar roles a cada usuario ME DA ERROR!
    users.forEach((user) => {
-      user.role = roles;
+      user.role = rolesData[0];
    });
+   // users[0].role = rolesData[0];
+   // console.log(users[0]);
 
    // Guardar usuarios en la base de datos
    await userRepository.save(users);

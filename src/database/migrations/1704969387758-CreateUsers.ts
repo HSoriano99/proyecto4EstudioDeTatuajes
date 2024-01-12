@@ -17,9 +17,8 @@ export class CreateUsers1704969387758 implements MigrationInterface {
                   generationStrategy: "increment",
                 },
                 {
-                  name: "role_id",
+                  name: "role",
                   type: "int",
-                  isUnique: true,
                 },
                 {
                   name: "username",
@@ -41,7 +40,7 @@ export class CreateUsers1704969387758 implements MigrationInterface {
               ],
               foreignKeys: [
                 {
-                  columnNames: ["role_id"],
+                  columnNames: ["role"],
                   referencedTableName: "roles",
                   referencedColumnNames: ["id"],
                   onDelete: "CASCADE"

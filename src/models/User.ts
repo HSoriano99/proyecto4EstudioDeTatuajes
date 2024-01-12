@@ -20,8 +20,8 @@ export class User extends BaseEntity {
 
     // N:1 con Role
     @ManyToOne(() => Role, (role) => role.user)
-    @JoinColumn ({name: "role_id"})
-    role?: Role[];
+    @JoinColumn ({name: "role"}) 
+    role!: Role;
 
      // 1:1 con Clients 
    @OneToOne(() => Client, (client) => client.user)
