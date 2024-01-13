@@ -13,5 +13,20 @@ export class UserController implements Controller {
                 message: "Error while getting users",
             })
         }
-    }   
-}
+    }
+
+    async getById(req: Request, res: Response): Promise<void> {
+        try {
+            const id = +req.params.id;
+            const user = await User.findOneBy({
+                id: id,
+            }) 
+            res.status(200).json(user);
+        } catch (error) {
+            res.status(500).json({
+                message: "Error while getting user",
+            })
+        }
+    }
+
+    }
