@@ -18,8 +18,9 @@ export const roleSeeder = async () => {
       // Definir los roles a sembrar (utilizando valores de UserRoles)
       const roles: Role[] = [
          UserRoles.ADMIN,
-         UserRoles.CLIENT,
          UserRoles.ARTIST,
+         UserRoles.CLIENT,
+        
       ];
 
       // Guardar los roles en la base de datos
