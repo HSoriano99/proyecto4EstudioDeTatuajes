@@ -23,7 +23,7 @@
 Este proyecto requería una API funcional conectada a una base de datos con al menos una relación de uno a muchos y una relación de muchos a muchos.
 
 ## Sobre el proyecto
-Consiste en crear una aplicación web para un estudio de tatuajes, que nos permitirá registrarnos, ver y crear citas para tatuarnos con diferentes tatuadores y realiozar diferentes consultas a la base de datos. Actualmente son funcionales los seeders de Roles y de Users, peticiones para ver todos los usuarios y ver solo el usuario segun identificador. El registro de usuarios etá en proceso. Así como las demas peticiones.
+Consiste en crear una aplicación web para un estudio de tatuajes, que nos permitirá registrarnos, ver y crear citas para tatuarnos con diferentes tatuadores y realizar diferentes consultas a la base de datos. Actualmente son funcionales los seeders de Roles y de Users asignando un rol para poder hacer peticiones basicas sin tener que registrar usuarios. Como peticiones tambien podremos registrar usuarios, bien clientes o artistas. Podremos eliminar usuarios por su identificador, consultar perfil de usuario por identificador y consultar todos los usuarios.
 
 
 ## Stack
@@ -52,19 +52,30 @@ Tecnologías utilizadas:
 <summary>Endpoints</summary>
 
 - AUTH
-    - REGISTER
+    - REGISTER CLIENT
 
-            POST http://localhost:3000/api/register
+            POST http://localhost:3000/api/auth/registerClient
         body:
         ``` js
             {
-                "user": "David",
+                "username": "David",
                 "email": "david@david.com",
                 "password": "princes"
             }
         ```
+     - REGISTER ARTIST
 
-    - LOGIN
+            POST http://localhost:3000/api/auth/registerArtist
+        body:
+        ``` js
+            {
+                "username": "Roberto",
+                "email": "roberto@roberto.com",
+                "password": "princes1234"
+            }
+    
+
+    <!-- - LOGIN
 
             POST http://localhost:3000/api/login  
         body:
@@ -73,16 +84,22 @@ Tecnologías utilizadas:
                 "user": "David",
                 "email": "david@david.com",
                 "password": "princes"
-            }
+            } -->
         ```
 - USUARIOS
-    - RECUPERAR USUARIOS
+    - RECUPERAR TODOS USUARIOS 
 
-            GET http://localhost:3000/api/users --> getAll
-            GET http://localhost:3000/api/users/:id --> getById
+            GET http://localhost:3000/api/users 
+    
+    - RECUPERAR USUARIOS POR ID
+
+             GET http://localhost:3000/api/users/:id 
+
+    - ELIMINAR USUARIOS POR ID
+
+            DELETE http://localhost:3000/api/users/:id
 
 
-    - ...
 </details>
 
 ## Futuras funcionalidades
