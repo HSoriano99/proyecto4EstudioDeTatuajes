@@ -15,11 +15,11 @@ export const userSeeder = async () => {
       await AppDataSource.initialize();
 
       // Definir la cantidad de estudiantes a crear
-      const count = 3;
+      const count = 5;
 
       // / Llamar a la función para sembrar usuarios con roles de admin
       await seedUsersWithRoles({
-         roles: [UserRoles.ADMIN],
+         roles: [UserRoles.ARTIST],
          count: count,
       });
 
@@ -51,11 +51,11 @@ export const seedUsersWithRoles = async ({
 
    // Generar usuarios
    const users = userFactory.createMany(count);
-   console.log(rolesData[0]);
+   console.log(rolesData[1]);
 
    // Asignar roles a cada usuario ME DA ERROR!
    users.forEach((user) => {
-      user.role = rolesData[0];
+      user.role = rolesData[1];
    });
    // users[0].role = rolesData[0];
    // console.log(users[0]);

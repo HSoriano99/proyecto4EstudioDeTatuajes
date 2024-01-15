@@ -6,7 +6,7 @@ import router from "./router";
 const app: Application = express();
 
 // Middlewares
-// app.use(express.json());
+app.use(express.json());
 
 // Rutas
 app.use(router)

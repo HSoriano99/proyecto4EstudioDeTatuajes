@@ -11,7 +11,8 @@ export class AuthController {
         req: Request<{}, {}, CreateClientRequestBody>,
         res: Response
      ): Promise<void | Response<any>> {
-        const { username, password, email } = req.body || {};
+        const { username, password, email } = req.body; //|| {};
+
 
         const userRepository = AppDataSource.getRepository(User);
         const roleRepository = AppDataSource.getRepository(Role);
@@ -23,7 +24,7 @@ export class AuthController {
                 username,
                 email,
                 password_hash: bcrypt.hashSync(password, 10),
-                // role: rolesData[1],
+                role: rolesData[1],
             });
             await userRepository.save(newUser);
 
@@ -38,7 +39,4 @@ export class AuthController {
 
     }
 
-    async login(req: Request, res: Response): Promise<void | Response<any>> {
-        
-    }
 }

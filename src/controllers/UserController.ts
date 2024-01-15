@@ -52,4 +52,29 @@ export class UserController implements Controller {
 //       });
 //     }
 //   }
+
+async delete(req: Request, res: Response): Promise<void | Response<any>> {
+  try {
+     const id = +req.params.id;
+
+     const userRepository = AppDataSource.getRepository(User);
+     await userRepository.delete(id);
+     // const roleRepository = AppDataSource.getRepository();
+     // await roleRepository.deleteRolesFromUserId(id);
+  
+
+     res.status(200).json({
+        message: "User deleted successfully",
+     });
+  } catch (error: any) { 
+     console.error("Error while delete users:", error); 
+     res.status(500).json({ 
+       message: "Error while delete users", 
+       error: error.message, 
+     }); 
+   } 
+ }
 }
+
+
+
