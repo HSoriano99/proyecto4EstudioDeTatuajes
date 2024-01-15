@@ -103,7 +103,7 @@ Tecnologías utilizadas:
 </details>
 
 ## Futuras funcionalidades
-[ ] Finalzar el registro de usuarios 
+[ ] LOGIN de usuarios
 [ ] Creacion de citas 
 [ ] ...
 
