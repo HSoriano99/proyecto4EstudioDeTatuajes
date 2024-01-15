@@ -39,19 +39,6 @@ export class UserController implements Controller {
     }
   }
 
-//   async create(req: Request, res: Response): Promise<void | Response<any>> {
-//     try {
-//       const data = req.body;
-
-//       const userRepository = AppDataSource.getRepository(User);
-//       const newUser = await userRepository.save(data);
-//       res.status(201).json(newUser);
-//     } catch (error) {
-//       res.status(500).json({
-//         message: "Error while creating user",
-//       });
-//     }
-//   }
 
 async delete(req: Request, res: Response): Promise<void | Response<any>> {
   try {
@@ -59,8 +46,6 @@ async delete(req: Request, res: Response): Promise<void | Response<any>> {
 
      const userRepository = AppDataSource.getRepository(User);
      await userRepository.delete(id);
-     // const roleRepository = AppDataSource.getRepository();
-     // await roleRepository.deleteRolesFromUserId(id);
   
 
      res.status(200).json({

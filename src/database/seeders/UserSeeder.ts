@@ -17,9 +17,9 @@ export const userSeeder = async () => {
       // Definir la cantidad de estudiantes a crear
       const count = 5;
 
-      // / Llamar a la función para sembrar usuarios con roles de admin
+      // / Llamar a la función para sembrar usuarios con roles
       await seedUsersWithRoles({
-         roles: [UserRoles.ARTIST],
+         roles: [UserRoles.ARTIST], //Elegimos ADMIN, ARTIST o CLIENTS en funcion de que rol queramos
          count: count,
       });
 
@@ -51,14 +51,12 @@ export const seedUsersWithRoles = async ({
 
    // Generar usuarios
    const users = userFactory.createMany(count);
-   console.log(rolesData[1]);
 
-   // Asignar roles a cada usuario ME DA ERROR!
+   // Asignar roles a cada usuario(si queremos ARTISTS debemos poner [1] en rolesData y [2] si queremos CLIENTS)
    users.forEach((user) => {
       user.role = rolesData[1];
    });
-   // users[0].role = rolesData[0];
-   // console.log(users[0]);
+  
 
    // Guardar usuarios en la base de datos
    await userRepository.save(users);

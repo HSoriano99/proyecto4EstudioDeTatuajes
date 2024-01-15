@@ -1,11 +1,11 @@
-import express from "express";
-import { ClientController } from "../controllers/ClientController";
+// import express from "express";
+// import { ClientController } from "../controllers/ClientController";
 
 
 
-const router = express.Router();
-const clientController = new ClientController();
+// const router = express.Router();
+// const clientController = new ClientController();
 
-router.get("/", clientController.getAllClients);
+// router.get("/", clientController.getAllClients);
 
-export default router;
+// export default router;
