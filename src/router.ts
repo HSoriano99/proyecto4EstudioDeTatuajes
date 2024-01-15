@@ -10,7 +10,6 @@ const router = express.Router();
 router.use("/api/users", userRoutes);
 //Auth routes
 router.use("/api/auth", authRoutes);
-//Client routes
-// router.use("/api/clients", clientRoutes);
+
 
 export default router;
