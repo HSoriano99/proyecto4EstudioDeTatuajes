@@ -155,6 +155,7 @@ Agradezco a mis compañeros el tiempo dedicado a este proyecto:
 
 - **Reynaldo**  
 
+Así como a los profesores de GeeksHubs Academy por acompañarnos dia a dia en el proceso.
 
 ## Contacto
 <a href = "hsoriano9986@gmail.com"><img src="https://img.shields.io/badge/Gmail-C6362C?style=for-the-badge&logo=gmail&logoColor=white" target="_blank"></a>
