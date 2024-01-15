@@ -1,11 +1,10 @@
-# Estudio de tatuajes API REST(README base)
+# Estudio de tatuajes API REST
 
 <details>
   <summary>Contenido 📝</summary>
   <ol>
     <li><a href="#objetivo">Objetivo</a></li>
     <li><a href="#sobre-el-proyecto">Sobre el proyecto</a></li>
-    <li><a href="#deploy-🚀">Deploy</a></li>
     <li><a href="#stack">Stack</a></li>
     <li><a href="#diagrama-bd">Diagrama</a></li>
     <li><a href="#instalación-en-local">Instalación</a></li>
@@ -24,33 +23,20 @@
 Este proyecto requería una API funcional conectada a una base de datos con al menos una relación de uno a muchos y una relación de muchos a muchos.
 
 ## Sobre el proyecto
-Decidí crear una aplicación web para ayudar a los amantes del gimnasio, que les permitiría crear y realizar un seguimiento de nuevas rutinas para sus ejercicios diarios. He visto muchas apps de este estilo pero ninguna que nos permita cambiar tan libremente las rutinas adaptandolas a nuestras necesidades.    
+Consiste en crear una aplicación web para un estudio de tatuajes, que nos permitirá registrarnos, ver y crear citas para tatuarnos con diferentes tatuadores y realiozar diferentes consultas a la base de datos. Actualmente son funcionales los seeders de Roles y de Users, peticiones para ver todos los usuarios y ver solo el usuario segun identificador. El registro de usuarios etá en proceso. Así como las demas peticiones.
 
-## Deploy 🚀
-<div align="center">
-    <a href="https://www.google.com"><strong>Url a producción </strong></a>🚀🚀🚀
-</div>
 
 ## Stack
 Tecnologías utilizadas:
-<div align="center">
-<a href="https://www.mongodb.com/">
-    <img src= "https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white"/>
-</a>
-<a href="https://www.expressjs.com/">
-    <img src= "https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB"/>
-</a>
-<a href="https://nodejs.org/es/">
-    <img src= "https://img.shields.io/badge/node.js-026E00?style=for-the-badge&logo=node.js&logoColor=white"/>
-</a>
-<a href="https://developer.mozilla.org/es/docs/Web/JavaScript">
-    <img src= "https://img.shields.io/badge/javascipt-EFD81D?style=for-the-badge&logo=javascript&logoColor=black"/>
-</a>
- </div>
-
+ - SQL/MySQL
+ - EXPRESS
+ - DOCKER
+ - NODE.JS
+ - TYPESCRIPT
+ - TYPEORM
 
 ## Diagrama BD
-!['imagen-db'](./typeorm_academy.png)
+!['imagen-db'](./EstudioTatuajesDB.png)
 
 ## Instalación en local
 1. Clonar el repositorio
@@ -89,18 +75,19 @@ Tecnologías utilizadas:
                 "password": "princes"
             }
         ```
-- RUTINAS
-    - RECUPERAR RUTINAS  
+- USUARIOS
+    - RECUPERAR USUARIOS
 
-            GET http://localhost:3000/api/rutina
+            GET http://localhost:3000/api/users --> getAll
+            GET http://localhost:3000/api/users/:id --> getById
+
 
     - ...
 </details>
 
 ## Futuras funcionalidades
-[ ] Añadir create book  
-[ ] Añadir logs  con winston  
-[ ] Validaciones de la solicitud con express-validator  
+[ ] Finalzar el registro de usuarios 
+[ ] Creacion de citas 
 [ ] ...
 
 ## Contribuciones
@@ -125,36 +112,34 @@ Puedes hacerlo de dos maneras:
     - Abre una solicitud de Pull Request
 
 ## Licencia
-Este proyecto se encuentra bajo licencia de "Mi Nombre"
+Este proyecto se encuentra bajo licencia de "Hector"
 
 ## Webgrafia:
 Para conseguir mi objetivo he recopilado información de:
-- link a repositorios 
-- link a documentacion de librerias externas
+- Documentacion propia del curso GeeksHubs junto con las sesiones grabadas.
+- Documentacion propia de TypeOrm
 - ...
 
 ## Desarrollo:
 
 ``` js
- const developer = "datata";
+ const developer = "Hector";
 
- console.log("Desarrollado por: " + datata);
+ console.log("Desarrollado por: " + developer);
 ```  
 
 ## Agradecimientos:
 
 Agradezco a mis compañeros el tiempo dedicado a este proyecto:
 
-- *Jose*  
-<a href="https://github.com/Dave86dev" target="_blank"><img src="https://img.shields.io/badge/github-24292F?style=for-the-badge&logo=github&logoColor=white" target="_blank"></a> 
+- **Erika**  
 
-- **David**  
-<a href="https://www.github.com/userGithub/" target="_blank"><img src="https://img.shields.io/badge/github-24292F?style=for-the-badge&logo=github&logoColor=red" target="_blank"></a>
+- **Gabriel**  
 
-- ***Mara***  
-<a href="https://www.github.com/userGithub/" target="_blank"><img src="https://img.shields.io/badge/github-24292F?style=for-the-badge&logo=github&logoColor=green" target="_blank"></a> 
+- **Reynaldo**  
+
 
 ## Contacto
-<a href = "mailto:micorreoelectronico@gmail.com"><img src="https://img.shields.io/badge/Gmail-C6362C?style=for-the-badge&logo=gmail&logoColor=white" target="_blank"></a>
-<a href="https://www.linkedin.com/in/linkedinUser/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a> 
-</p> 
+<a href = "hsoriano9986@gmail.com"><img src="https://img.shields.io/badge/Gmail-C6362C?style=for-the-badge&logo=gmail&logoColor=white" target="_blank"></a>
+
+ 

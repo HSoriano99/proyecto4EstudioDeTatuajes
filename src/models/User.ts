@@ -4,7 +4,7 @@ import { Client } from "./Client"
 import { Artist } from "./Artist"
 
 @Entity("users")
-export class User extends BaseEntity {
+export class User {
 
     @PrimaryGeneratedColumn()
     id!: number

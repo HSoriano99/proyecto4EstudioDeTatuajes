@@ -11,7 +11,7 @@ export class AuthController {
         req: Request<{}, {}, CreateClientRequestBody>,
         res: Response
      ): Promise<void | Response<any>> {
-        const { username, password_hash, email } = req.body || {};
+        const { username, password, email } = req.body || {};
 
         const userRepository = AppDataSource.getRepository(User);
         const roleRepository = AppDataSource.getRepository(Role);
@@ -22,12 +22,12 @@ export class AuthController {
             const newUser = userRepository.create({
                 username,
                 email,
-                password_hash: bcrypt.hashSync(password_hash, 10),
+                password_hash: bcrypt.hashSync(password, 10),
                 // role: rolesData[1],
             });
             await userRepository.save(newUser);
 
-            res.status(201).json();
+            res.status(201).json(newUser);
           } catch (error: any) {
             console.error("Error while creating user:", error);
             res.status(500).json({
