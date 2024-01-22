@@ -8,5 +8,15 @@ export interface CreateClientRequestBody {
  };
 
 
- 
+ export interface CreateArtistRequestBody {
+  username: string;
+  email: string;
+  password: string;
+  first_name: string;
+  phone_number: string;
+  tattoo_style: string;
+  user_id:number;
+};
+
+
    

@@ -1,10 +1,12 @@
 import { Request, Response } from "express";
 import { CreateClientRequestBody } from "../types/types";
+import { CreateArtistRequestBody } from "../types/types";
 import { User } from "../models/User";
 import bcrypt from "bcrypt";
 import { AppDataSource } from "../database/data-source";
 import { Role } from "../models/Role";
 import { Client } from "../models/Client";
+import { Artist } from "../models/Artist";
 
 export class AuthController {
     
@@ -51,15 +53,16 @@ export class AuthController {
     }
 
     async registerArtist(
-      req: Request<{}, {}, CreateClientRequestBody>,
+      req: Request<{}, {}, CreateArtistRequestBody>,
       res: Response
    ): Promise<void | Response<any>> {
-      const { username, password, email } = req.body;
-
+      const { username, password, email, first_name, phone_number, tattoo_style } = req.body;
 
       const userRepository = AppDataSource.getRepository(User);
+      const artistRepository = AppDataSource.getRepository(Artist);
       const roleRepository = AppDataSource.getRepository(Role);
       let rolesData = await roleRepository.find();
+
 
       try {
          
@@ -71,7 +74,16 @@ export class AuthController {
           });
           await userRepository.save(newUser);
 
-          res.status(201).json(newUser);
+           //Crear nuevo artista y asociarlo con el usuario recien creado
+           const newArtist = artistRepository.create({
+            user: newUser,
+            first_name,
+            phone_number,
+            tattoo_style,
+          });
+          await artistRepository.save(newArtist);
+
+          res.status(201).json(newArtist);
         } catch (error: any) {
           console.error("Error while creating user:", error);
           res.status(500).json({
