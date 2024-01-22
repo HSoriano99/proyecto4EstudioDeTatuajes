@@ -4,22 +4,25 @@ import { User } from "../models/User";
 import bcrypt from "bcrypt";
 import { AppDataSource } from "../database/data-source";
 import { Role } from "../models/Role";
+import { Client } from "../models/Client";
 
 export class AuthController {
-
+    
     async registerClient(
+      //Proceso de registro de nuevo cliente 
         req: Request<{}, {}, CreateClientRequestBody>,
         res: Response
      ): Promise<void | Response<any>> {
-        const { username, password, email } = req.body;
+        const { username, password, email, first_name, phone_number } = req.body;
 
 
         const userRepository = AppDataSource.getRepository(User);
+        const clientRepository = AppDataSource.getRepository(Client);
         const roleRepository = AppDataSource.getRepository(Role);
         let rolesData = await roleRepository.find();
 
         try {
-           
+           //Crear neuvo usuario
             const newUser = userRepository.create({
                 username,
                 email,
@@ -27,8 +30,16 @@ export class AuthController {
                 role: rolesData[2],
             });
             await userRepository.save(newUser);
+            
+          //Crear nuevo cliente y asociarlo con el usuario recien creado
+            const newClient = clientRepository.create({
+              user: newUser,
+              first_name,
+              phone_number,
+            });
+            await clientRepository.save(newClient);
 
-            res.status(201).json(newUser);
+            res.status(201).json(newClient);
           } catch (error: any) {
             console.error("Error while creating user:", error);
             res.status(500).json({

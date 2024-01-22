@@ -19,7 +19,7 @@ export const userSeeder = async () => {
 
       // / Llamar a la función para sembrar usuarios con roles
       await seedUsersWithRoles({
-         roles: [UserRoles.ARTIST], //Elegimos ADMIN, ARTIST o CLIENTS en funcion de que rol queramos
+         roles: [UserRoles.ADMIN], //Elegimos ADMIN, ARTIST o CLIENTS en funcion de que rol queramos
          count: count,
       });
 
@@ -54,7 +54,7 @@ export const seedUsersWithRoles = async ({
 
    // Asignar roles a cada usuario(si queremos ARTISTS debemos poner [1] en rolesData y [2] si queremos CLIENTS)
    users.forEach((user) => {
-      user.role = rolesData[1];
+      user.role = rolesData[0];
    });
   
 
