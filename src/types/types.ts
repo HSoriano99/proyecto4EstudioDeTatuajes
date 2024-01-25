@@ -7,7 +7,6 @@ export interface CreateClientRequestBody {
     user_id:number;
  };
 
-
  export interface CreateArtistRequestBody {
   username: string;
   email: string;
