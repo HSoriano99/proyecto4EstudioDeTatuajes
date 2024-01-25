@@ -1,12 +1,13 @@
 import { Request, Response } from "express";
-import { CreateClientRequestBody } from "../types/types";
-import { CreateArtistRequestBody } from "../types/types";
+import { CreateClientRequestBody, CreateArtistRequestBody, LoginUserRequestBody, TokenData} from "../types/types";
 import { User } from "../models/User";
 import bcrypt from "bcrypt";
 import { AppDataSource } from "../database/data-source";
 import { Role } from "../models/Role";
 import { Client } from "../models/Client";
 import { Artist } from "../models/Artist";
+import { StatusCodes } from "http-status-codes";
+import jwt from "jsonwebtoken";
 
 export class AuthController {
     
@@ -91,6 +92,79 @@ export class AuthController {
             error: error.message,
           });
         }
+  }
+
+  async login(
+    req: Request<{}, {}, LoginUserRequestBody>,
+    res: Response
+  ): Promise<void | Response<any>> {
+    const { password_hash, email } = req.body;
+
+    const userRepository = AppDataSource.getRepository(User);
+
+    try {
+      // Validar existencia de email y contraseña
+      if (!email || !password_hash) {
+        return res.status(StatusCodes.BAD_REQUEST).json({
+          message: "Email or password is required",
+        });
+      }
+      // Encontrar un usuario por email
+      const user = await userRepository.findOne({
+        where: {
+          email: email,
+        },
+        relations: {
+          role: true,
+        },
+        select: {
+          role: {
+            role_name: true,
+          },
+        },
+      });
+
+      // Verificar usuario inexistente
+      if (!user) {
+        return res.status(StatusCodes.BAD_REQUEST).json({
+          message: "Bad email or password",
+        });
+      }
+
+      // Verificar contraseña si el usuario existe
+      const isPasswordValid = bcrypt.compareSync(
+        password_hash,
+        user.password_hash
+      );
+
+      // Verificar contraseña valida
+      if (!isPasswordValid) {
+        return res.status(StatusCodes.BAD_REQUEST).json({
+          message: "Bad email or password",
+        });
+      }
+
+      // Generar token
+
+      const tokenPayload: TokenData = {
+        userId: user.id?.toString() as string,
+        userRoles: ["admin", "artist", "client"],
+      };
+
+      const token = jwt.sign(tokenPayload, "123", {
+        expiresIn: "3h",
+      });
+
+      res.status(StatusCodes.OK).json({
+        message: "Login successfully",
+        token,
+      });
+    } catch (error) {
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+        message: "Error while login",
+        error,
+      });
+    }
   }
 
 }

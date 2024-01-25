@@ -18,5 +18,13 @@ export interface CreateClientRequestBody {
   user_id:number;
 };
 
+export interface LoginUserRequestBody {
+  email: string;
+  password_hash: string;
+}
 
+export interface TokenData {
+  userId: string;
+  userRoles: string[];
+}
    
