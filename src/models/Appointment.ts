@@ -8,20 +8,20 @@ export class Appointment extends BaseEntity {
     @PrimaryGeneratedColumn()
     id!: number
 
-    @Column()
-    appointment_date!: Date
+    @Column({ type: "date" })
+    date!: Date
 
     @Column()
     shift!: string
 
     // N:1 con Client 
     @ManyToOne(() => Client, (client) => client.appointment)
-    @JoinColumn({name: "client_id"})
+    @JoinColumn({name: "client_id", referencedColumnName: "id"})
     client!: Client;
 
      // N:1 con Artist 
      @ManyToOne(() => Artist, (artist) => artist.appointment)
-     @JoinColumn ({name: "artist_id"})
+     @JoinColumn ({name: "artist_id", referencedColumnName: "id"})
      artist!: Artist;
 
 
