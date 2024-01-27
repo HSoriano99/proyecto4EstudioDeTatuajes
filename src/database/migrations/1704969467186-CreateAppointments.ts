@@ -17,15 +17,13 @@ export class CreateAppointments1704969467186 implements MigrationInterface {
                   generationStrategy: "increment",
                 },
                 {
-                  name: "client_id",
+                  name: "client",
                   type: "int",
-                  isUnique: true,
                   isNullable: true,
                 },
                 {
-                  name: "artist_id",
+                  name: "artist",
                   type: "int",
-                  isUnique: true,
                   isNullable: true,
                 },
                 {
@@ -43,13 +41,13 @@ export class CreateAppointments1704969467186 implements MigrationInterface {
               ],
               foreignKeys: [
                 {
-                  columnNames: ["client_id"],
+                  columnNames: ["client"],
                   referencedTableName: "clients",
                   referencedColumnNames: ["id"],
                   onDelete: "CASCADE"
                 },
                 {
-                  columnNames: ["artist_id"],
+                  columnNames: ["artist"],
                   referencedTableName: "artists",
                   referencedColumnNames: ["id"],
                   onDelete: "CASCADE"
