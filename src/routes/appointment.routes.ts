@@ -11,7 +11,7 @@ const appointmentController = new AppointmentController();
 router.post("/newAppointment", auth, isArtist, appointmentController.create);//CREAMOS CITA UICAMENTE COMO ARTISTA
 router.patch("/update/:id", auth, isArtist, appointmentController.update);//EDITAMOS CITA UNICAMENTE COMO ARTISTA
 router.delete("/delete/:id", auth, isArtist, appointmentController.delete);//BORRAMOS CITA UNICAMENTE COMO ARTISTA
-router.get("/mysessions/:id", auth, isClient , appointmentController.getById);//BUSCAMOS NUESTRAS CITAS COMO CLIENTE
-
+router.get("/myClientSessions/:id", auth, isClient , appointmentController.getByClientId);//BUSCAMOS NUESTRAS CITAS COMO CLIENTE
+router.get("/myArtistSessions/:id", auth, isArtist , appointmentController.getByArtistId);//BUSCAMOS NUESTRAS CITAS COMO ARTISTA
 
 export default router;
