@@ -163,6 +163,14 @@ Tecnologías utilizadas:
 
            GET http://localhost:3000/api/appointments/myArtistSessions/:id
 
+
+- VISUALIZAR TODOS LOS ARTISTAS
+
+           GET http://localhost:3000/api/auth/getAllArtists
+
+          
+
+
 </details>
 
 ## Futuras funcionalidades

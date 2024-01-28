@@ -2,6 +2,7 @@ import { Controller } from "./Controller";
 import { Request, Response } from "express";
 import { User } from "../models/User";
 import { AppDataSource } from "../database/data-source";
+import { Artist } from "../models/Artist";
 
 export class UserController implements Controller {
   async getAll(req: Request, res: Response): Promise<void | Response<any>> {
@@ -59,6 +60,7 @@ async delete(req: Request, res: Response): Promise<void | Response<any>> {
      }); 
    } 
  }
+
 }
 
 
