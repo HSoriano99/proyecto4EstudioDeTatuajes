@@ -6,8 +6,9 @@ import { auth } from "../middlewares/auth";
 const router = express.Router();
 const userController = new UserController();
 
-// router.get("/",auth, isAdmin, userController.getAll);
 router.get("/:id", auth , userController.getById);//ver NUESTRO perfil
-router.delete("/:id", userController.delete);
+// router.delete("/:id", userController.delete);
+//router.get("/",auth, userController.getAll);
+
 
 export default router;
