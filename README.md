@@ -125,7 +125,7 @@ Tecnologías utilizadas:
 
 - APPOINTMENTS
 
-- CREAR UN APPOINTMENT
+- CREAR UN APPOINTMENT (UNICAMENTE PUEDEN LOS ARTISTAS)
 
           POST http://localhost:3000/api/appointments/newAppointment
 
@@ -140,9 +140,9 @@ Tecnologías utilizadas:
         }
     ```
 
-- MODIFICAR DATOS DE UNA CITA
+- MODIFICAR DATOS DE UN APPOINTMENT (UNICAMENTE PUEDEN LOS ARTISTAS)
 
-           GET http://localhost:3000/api/appointments/update/:id
+           PATCH http://localhost:3000/api/appointments/update/:id
 
         body:
 
@@ -151,13 +151,24 @@ Tecnologías utilizadas:
             "shift": "afternoon"
         }   
 
+- BORRAR UN APPOINTMENT (UNICAMENTE PUEDEN LOS ARTISTAS)
+
+           DELETE http://localhost:3000/api/appointments/delete/:id
+
+- VISUALIZAR LAS CITAS QUE TENGA UN PROPIO CLIENTE (UNICAMENTE)
+
+           GET http://localhost:3000/api/appointments/myClientSessions/:id
+
+- VISUALIZAR LAS CITAS QUE TENGA UN PROPIO ARTISTA (UNICAMENTE)
+
+           GET http://localhost:3000/api/appointments/myArtistSessions/:id
 
 </details>
 
 ## Futuras funcionalidades
 
-[ ] LOGIN de usuarios
-[ ] Creacion de citas
+[ ] ...
+[ ] ...
 [ ] ...
 
 ## Contribuciones
