@@ -12,6 +12,7 @@ router.post("/registerArtist", authController.registerArtist);
 router.post("/login", authController.login);
 router.patch("/update/:id", auth, authController.update);//actualizamos NUESTRO perfil
 router.get("/getAllArtists", authController.getAllArtist);//traemos todos los artistas
+router.get("/getArtistUser/:id", authController.getArtistUser);//NOS TRAEMOS EL USER_ID DE NUESTRO ARTISTA
 
 
 export default router;

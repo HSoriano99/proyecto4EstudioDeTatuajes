@@ -197,5 +197,46 @@ export class AuthController {
     }
   }
 
+  async getArtistUser(req: Request, res: Response): Promise<void | Response<any>> {
+    try {
+
+      const id = +req.params.id;
+
+      const artistRepository = AppDataSource.getRepository(Artist);
+      
+      const artist = await artistRepository.findOneBy({
+        id: id,
+
+      });
+
+      if (!artist) {
+        return res.status(404).json({
+          message: "User not found",
+        });
+      }
+
+      const artistUser = Number(artist.user_id);
+      const userRepository = AppDataSource.getRepository(User);
+      const user = await userRepository.findOneBy({
+        id: artistUser
+
+      });
+       // operador spread "..." desempaqueta las claves del objeto
+      const response = {
+        ...artist,
+        ...user,
+      }
+      //Reasigno el valor de response.id puesto que se pisa su valor con el método spread.
+      response.id = artist.id
+
+      res.status(200).json(response);
+    } catch (error) {
+      res.status(500).json({
+        message: "Error while getting user",
+      });
+    }
+  }
+
+ 
 
 }
