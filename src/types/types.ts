@@ -19,7 +19,7 @@ export interface CreateArtistRequestBody {
 
 export interface LoginUserRequestBody {
   email: string;
-  password_hash: string;
+  password: string;
 }
 
 export interface TokenData {
