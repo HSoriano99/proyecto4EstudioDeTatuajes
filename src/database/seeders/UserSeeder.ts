@@ -41,7 +41,6 @@ export const seedUsersWithRoles = async ({
    count: number;
 }) => {
 
-   console.log(roles);
    // Obtener repositorios y fábricas necesarios
    const userRepository = AppDataSource.getRepository(User);
    const userFactory = new UserFactory(userRepository);

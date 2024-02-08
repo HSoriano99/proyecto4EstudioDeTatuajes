@@ -22,7 +22,7 @@ export class AuthController {
         const userRepository = AppDataSource.getRepository(User);
         const clientRepository = AppDataSource.getRepository(Client);
         const roleRepository = AppDataSource.getRepository(Role);
-        let rolesData = await roleRepository.find();
+        const rolesData = await roleRepository.find();
 
         try {
            //Crear neuvo usuario
@@ -62,7 +62,7 @@ export class AuthController {
       const userRepository = AppDataSource.getRepository(User);
       const artistRepository = AppDataSource.getRepository(Artist);
       const roleRepository = AppDataSource.getRepository(Role);
-      let rolesData = await roleRepository.find();
+      const rolesData = await roleRepository.find();
 
 
       try {
@@ -227,6 +227,85 @@ export class AuthController {
       }
       //Reasigno el valor de response.id puesto que se pisa su valor con el método spread.
       response.id = artist.id
+
+      res.status(200).json(response);
+    } catch (error) {
+      res.status(500).json({
+        message: "Error while getting user",
+      });
+    }
+  }
+
+  async getClientUser(req: Request, res: Response): Promise<void | Response<any>> {
+    try {
+
+      const id = +req.params.id;
+
+      const clientRepository = AppDataSource.getRepository(Client);
+      
+      const client = await clientRepository.findOneBy({
+        id: id,
+      });
+
+      if (!client) {
+        return res.status(404).json({
+          message: "User not found",
+        });
+      }
+
+      const clientUser = Number(client.user_id);
+      const userRepository = AppDataSource.getRepository(User);
+      const user = await userRepository.findOneBy({
+        id: clientUser
+
+      });
+       // operador spread "..." desempaqueta las claves del objeto
+      const response = {
+        ...client,
+        ...user,
+      }
+      //Reasigno el valor de response.id puesto que se pisa su valor con el método spread.
+      response.id = client.id
+
+      res.status(200).json(response);
+    } catch (error) {
+      res.status(500).json({
+        message: "Error while getting user",
+      });
+    }
+  }
+
+  async getClientByUser(req: Request, res: Response): Promise<void | Response<any>> {
+    try {
+
+      const id = +req.params.id;
+
+      const userRepository = AppDataSource.getRepository(User);
+      
+      const user = await userRepository.findOneBy({
+        id: id,
+      });
+
+      if (!user) {
+        return res.status(404).json({
+          message: "User not found",
+        });
+      }
+
+      const userClient = Number(user.id);
+      const clientRepository = AppDataSource.getRepository(Client);
+      const client = await clientRepository.findOneBy({
+        user_id: userClient
+
+      });
+       // operador spread "..." desempaqueta las claves del objeto
+      const response = {
+        ...client,
+        ...user,
+      }
+      //Reasigno el valor de response.id puesto que se pisa su valor con el método spread.
+      // response.id = client.id
+      console.log(response)
 
       res.status(200).json(response);
     } catch (error) {
