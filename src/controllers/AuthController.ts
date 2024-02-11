@@ -8,6 +8,7 @@ import { Client } from "../models/Client";
 import { Artist } from "../models/Artist";
 import { StatusCodes } from "http-status-codes";
 import jwt from "jsonwebtoken";
+import { Appointment } from "../models/Appointment";
 
 export class AuthController {
     
@@ -298,10 +299,19 @@ export class AuthController {
         user_id: userClient
 
       });
+
+      const clientId = Number(client?.id)
+      const appointmentRepository = AppDataSource.getRepository(Appointment);
+      const appointment = await appointmentRepository.findBy({
+        client_id: clientId
+      })
+
+
        // operador spread "..." desempaqueta las claves del objeto
       const response = {
         ...client,
         ...user,
+        appointment
       }
       //Reasigno el valor de response.id puesto que se pisa su valor con el método spread.
       // response.id = client.id
