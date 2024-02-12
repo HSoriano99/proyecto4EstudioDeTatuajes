@@ -303,9 +303,32 @@ export class AuthController {
       const clientId = Number(client?.id)
       
       const appointmentRepository = AppDataSource.getRepository(Appointment);
-      const appointment = await appointmentRepository.findBy({
-        client_id: clientId
+      const appointment = await appointmentRepository.find({
+        where: {client_id: clientId},
+        relations: {
+          artist:true
+        },
+        select: {
+          id:true,
+          date:true,
+          shift:true,
+          artist: {
+            first_name:true,
+            tattoo_style:true,
+            phone_number:true,
+          }
+        }
+
       })
+
+      //------------------------------------------------------------------
+      // const artistsIds = appointment.map((appointment,index) =>{
+      //   return {
+      //     appointment[index].artist_id
+
+      //   }
+      // })
+      //------------------------------------------------------------------
 
        // operador spread "..." desempaqueta las claves del objeto
       const response = {
