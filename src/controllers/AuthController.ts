@@ -301,11 +301,11 @@ export class AuthController {
       });
 
       const clientId = Number(client?.id)
+      
       const appointmentRepository = AppDataSource.getRepository(Appointment);
       const appointment = await appointmentRepository.findBy({
         client_id: clientId
       })
-
 
        // operador spread "..." desempaqueta las claves del objeto
       const response = {
