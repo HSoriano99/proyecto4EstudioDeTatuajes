@@ -119,11 +119,16 @@ export class AuthController {
           role: true,
         },
         select: {
+          id:true,
+          // username:true,
+          // email:true,
+          password_hash: true,
           role: {
             role_name: true,
           },
         },
       });
+
 
       // Verificar usuario inexistente
       if (!user) {
@@ -321,15 +326,6 @@ export class AuthController {
 
       })
 
-      //------------------------------------------------------------------
-      // const artistsIds = appointment.map((appointment,index) =>{
-      //   return {
-      //     appointment[index].artist_id
-
-      //   }
-      // })
-      //------------------------------------------------------------------
-
        // operador spread "..." desempaqueta las claves del objeto
       const response = {
         ...client,
@@ -338,7 +334,6 @@ export class AuthController {
       }
       //Reasigno el valor de response.id puesto que se pisa su valor con el método spread.
       // response.id = client.id
-      console.log(response)
 
       res.status(200).json(response);
     } catch (error) {
