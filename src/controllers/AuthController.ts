@@ -120,8 +120,6 @@ export class AuthController {
         },
         select: {
           id:true,
-          // username:true,
-          // email:true,
           password_hash: true,
           role: {
             role_name: true,
@@ -187,6 +185,24 @@ export class AuthController {
     } catch (error) {
       res.status(500).json({
         message: "Error while updating user",
+      });
+    }
+  }
+
+  async updateClient(req: Request, res: Response): Promise<void | Response<any>> {
+    try {
+      const id = +req.params.id;
+      const data = req.body;
+
+      const clientRepository = AppDataSource.getRepository(Client);
+      await clientRepository.update({ id: id }, data);
+
+      res.status(202).json({
+        message: "Client updated successfully",
+      });
+    } catch (error) {
+      res.status(500).json({
+        message: "Error while updating client",
       });
     }
   }
@@ -333,7 +349,7 @@ export class AuthController {
         appointment
       }
       //Reasigno el valor de response.id puesto que se pisa su valor con el método spread.
-      // response.id = client.id
+      response.id = client!.id
 
       res.status(200).json(response);
     } catch (error) {
