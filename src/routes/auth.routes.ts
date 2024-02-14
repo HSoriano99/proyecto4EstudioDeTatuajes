@@ -11,7 +11,7 @@ router.post("/registerClient", authController.registerClient);
 router.post("/registerArtist", authController.registerArtist);
 router.post("/login", authController.login);
 router.patch("/update/:id", auth, authController.update);//actualizamos NUESTRO perfil de USER
-router.patch("/updateClient/:id", auth, authController.updateClient);//actualizamos NUESTRO perfil de CLIENTE
+router.patch("/updateClient/user/:id", auth, authController.updateClient);//actualizamos NUESTRO perfil de CLIENTE
 router.get("/getAllArtists", authController.getAllArtist);//traemos todos los artistas
 router.get("/getArtistUser/:id", authController.getArtistUser);//NOS TRAEMOS EL USER_ID DE NUESTRO ARTISTA
 router.get("/getClienttUser/:id", authController.getClientUser);//NOS TRAEMOS EL USER_ID DE NUESTRO CLIENTE

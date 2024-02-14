@@ -194,8 +194,29 @@ export class AuthController {
       const id = +req.params.id;
       const data = req.body;
 
+      const userRepository = AppDataSource.getRepository(User);
+      
+      const user = await userRepository.findOneBy({
+        id: id,
+      });
+
+      if (!user) {
+        return res.status(404).json({
+          message: "User not found",
+        });
+      }
+
+      const userClient = Number(user.id);
       const clientRepository = AppDataSource.getRepository(Client);
-      await clientRepository.update({ id: id }, data);
+      const client = await clientRepository.findOneBy({
+        user_id: userClient
+
+      });
+
+      const clientId = Number(client?.id)
+
+      const clientRepositoryUpdate = AppDataSource.getRepository(Client);
+      await clientRepositoryUpdate.update({ id: clientId }, data);
 
       res.status(202).json({
         message: "Client updated successfully",
