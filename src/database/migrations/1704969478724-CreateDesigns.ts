@@ -22,7 +22,7 @@ export class CreateDesigns1704969478724 implements MigrationInterface {
                   
                 },
                 {
-                  name: "name",
+                  name: "design_name",
                   type: "varchar",
                   length: "50",
                 },

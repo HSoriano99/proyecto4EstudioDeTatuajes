@@ -6,6 +6,7 @@ import { AppDataSource } from "../database/data-source";
 import { Role } from "../models/Role";
 import { Client } from "../models/Client";
 import { Artist } from "../models/Artist";
+import { Design } from "../models/Design";
 import { StatusCodes } from "http-status-codes";
 import jwt from "jsonwebtoken";
 import { Appointment } from "../models/Appointment";
@@ -373,6 +374,81 @@ export class AuthController {
       }
       //Reasigno el valor de response.id puesto que se pisa su valor con el método spread.
       response.id = client!.id
+
+      res.status(200).json(response);
+    } catch (error) {
+      res.status(500).json({
+        message: "Error while getting user",
+      });
+    }
+  }
+
+  async getArtistByUser(req: Request, res: Response): Promise<void | Response<any>> {
+    try {
+
+      const id = +req.params.id;
+
+      const userRepository = AppDataSource.getRepository(User);
+      
+      const user = await userRepository.findOneBy({
+        id: id,
+      });
+
+      if (!user) {
+        return res.status(404).json({
+          message: "User not found",
+        });
+      }
+
+      const userArtist = Number(user.id);
+      const artistRepository = AppDataSource.getRepository(Artist);
+      const artist = await artistRepository.findOneBy({
+        user_id: userArtist
+
+      });
+
+      const artistId = Number(artist?.id)
+
+      const designRepository = AppDataSource.getRepository(Design);
+      const design = await designRepository.find({
+        where: {artist_id: artistId},
+        select: {
+          id: true,
+          artist_id: true,
+          design_name:true,
+          image:true,
+        }
+      })
+      
+      const appointmentRepository = AppDataSource.getRepository(Appointment);
+      const appointment = await appointmentRepository.find({
+        where: {artist_id: artistId},
+        relations: {
+          client:true
+        },
+        select: {
+          id:true,
+          date:true,
+          shift:true,
+          client: {
+            first_name:true,
+            phone_number:true,
+          }
+        }
+
+      })
+
+       // operador spread "..." desempaqueta las claves del objeto
+      const response = {
+        ...artist,
+        ...design,
+        ...user,
+        appointment
+      }
+      //Reasigno el valor de response.id puesto que se pisa su valor con el método spread.
+      response.id = artist!.id
+
+      console.log(response)
 
       res.status(200).json(response);
     } catch (error) {

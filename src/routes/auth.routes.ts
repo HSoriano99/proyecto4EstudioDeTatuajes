@@ -15,6 +15,7 @@ router.patch("/updateClient/user/:id", auth, authController.updateClient);//actu
 router.get("/getAllArtists", authController.getAllArtist);//traemos todos los artistas
 router.get("/getArtistUser/:id", authController.getArtistUser);//NOS TRAEMOS EL USER_ID DE NUESTRO ARTISTA
 router.get("/getClienttUser/:id", authController.getClientUser);//NOS TRAEMOS EL USER_ID DE NUESTRO CLIENTE
-router.get("/getClientByUser/:id", auth, authController.getClientByUser);//NOS TRAEMOS EL CLIENTE Y EL USER CON EL ID DE USER(TOKEN DESDE EL FRONT)
+router.get("/getClientByUser/:id", auth, authController.getClientByUser);//NOS TRAEMOS EL CLIENTE Y EL USER, SUS CITAS Y LOS DETALLES DEL TATUADOR, TODO CON EL ID DE USER(TOKEN DESDE EL FRONT)
+router.get("/getArtistByUser/:id", auth, authController.getArtistByUser);//NOS TRAEMOS EL ARTISTA Y EL USER, LOS DISEÑOS DEL ARTISTA, SUS CITAS Y LOS DETALLES DEL CLIENTE, TODO CON EL ID DE USER(TOKEN DESDE EL FRONT)
 
 export default router;
