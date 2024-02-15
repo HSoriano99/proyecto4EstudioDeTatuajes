@@ -19,7 +19,7 @@ export class CreateDesigns1704969478724 implements MigrationInterface {
                 {
                   name: "artist_id",
                   type: "int",
-                  isUnique: true,
+                  
                 },
                 {
                   name: "name",
@@ -29,7 +29,7 @@ export class CreateDesigns1704969478724 implements MigrationInterface {
                 {
                   name: "image",
                   type: "varchar",
-                  length: "50",
+                  length: "255",
                   isNullable: true,
                 },
               ],

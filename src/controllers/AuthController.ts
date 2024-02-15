@@ -149,10 +149,12 @@ export class AuthController {
       }
 
       // Generar token
+      const userRole = user.role.role_name
 
       const tokenPayload: TokenData = {
         userId: user.id?.toString() as string,
-        userRoles: ["admin", "artist", "client"],
+        userRoles: userRole as string
+      
       };
 
       const token = jwt.sign(tokenPayload, "123", {

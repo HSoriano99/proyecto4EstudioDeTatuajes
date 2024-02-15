@@ -24,7 +24,7 @@ export interface LoginUserRequestBody {
 
 export interface TokenData {
   userId: string;
-  userRoles: string[];
+  userRoles: string;
 }
 
 export interface CreateAppointmentsRequestBody {

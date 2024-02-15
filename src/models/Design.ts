@@ -8,9 +8,12 @@ export class Design extends BaseEntity {
     id!: number
 
     @Column()
-    design_name!: string
+    artist_id!: string
 
     @Column()
+    design_name!: string
+
+    @Column({array: true})
     image!: string
 
      // N:1 con Artist 
