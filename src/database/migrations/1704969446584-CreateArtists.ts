@@ -39,8 +39,8 @@ export class CreateArtists1704969446584 implements MigrationInterface {
                 },
                 {
                   name: "tattoo_style",
-                  type: "enum",
-                  enum: ["traditional", "tribal", "realism", "blackwork"],
+                  type: "varchar",
+                  length: "50",
                   isNullable: true,
                 },
               ],

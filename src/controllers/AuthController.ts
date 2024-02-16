@@ -231,6 +231,45 @@ export class AuthController {
     }
   }
 
+  async updateArtist(req: Request, res: Response): Promise<void | Response<any>> {
+    try {
+      const id = +req.params.id;
+      const data = req.body;
+
+      const userRepository = AppDataSource.getRepository(User);
+      
+      const user = await userRepository.findOneBy({
+        id: id,
+      });
+
+      if (!user) {
+        return res.status(404).json({
+          message: "User not found",
+        });
+      }
+
+      const userArtist = Number(user.id);
+      const artistRepository = AppDataSource.getRepository(Artist);
+      const artist = await artistRepository.findOneBy({
+        user_id: userArtist
+
+      });
+
+      const artistId = Number(artist?.id)
+
+      const artistRepositoryUpdate = AppDataSource.getRepository(Artist);
+      await artistRepositoryUpdate.update({ id: artistId }, data);
+
+      res.status(202).json({
+        message: "Artist updated successfully",
+      });
+    } catch (error) {
+      res.status(500).json({
+        message: "Error while updating client",
+      });
+    }
+  }
+
   async getAllArtist(req: Request, res: Response): Promise<void | Response<any>> {
     try {
       const artistRepository = AppDataSource.getRepository(Artist);
