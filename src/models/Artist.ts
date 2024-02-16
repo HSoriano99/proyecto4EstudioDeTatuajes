@@ -32,6 +32,10 @@ export class Artist extends BaseEntity {
   @Column()
   tattoo_style!: string;
 
+  @Column()
+  profile_image!: string
+
+
   // 1:1 con User
   @OneToOne(() => User, (user) => user.artist)
   @JoinColumn({ name: "user_id" })

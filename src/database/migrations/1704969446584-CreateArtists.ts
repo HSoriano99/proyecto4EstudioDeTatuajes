@@ -43,6 +43,12 @@ export class CreateArtists1704969446584 implements MigrationInterface {
                   length: "50",
                   isNullable: true,
                 },
+                {
+                  name: "profile_image",
+                  type: "varchar",
+                  length: "255",
+                  isNullable: true,
+                },
               ],
               foreignKeys: [
                 {
