@@ -487,8 +487,6 @@ export class AuthController {
       //Reasigno el valor de response.id puesto que se pisa su valor con el método spread.
       response.id = artist!.id
 
-      console.log(response)
-
       res.status(200).json(response);
     } catch (error) {
       res.status(500).json({

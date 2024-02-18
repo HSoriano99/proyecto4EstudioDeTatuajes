@@ -6,9 +6,10 @@ import { auth } from "../middlewares/auth";
 const router = express.Router();
 const userController = new UserController();
 
+router.get("/getAllPaginated", userController.getAllPaginated);
 router.get("/:id", auth, userController.getById);//ver NUESTRO perfil
 router.delete("/:id", userController.delete);
-//router.get("/",auth, userController.getAll);
+
 
 
 export default router;

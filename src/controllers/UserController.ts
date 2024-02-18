@@ -17,6 +17,52 @@ export class UserController implements Controller {
     }
   }
 
+  async getAllPaginated(req: Request, res: Response): Promise<void | Response<any>> {
+    try {
+       const userRepository = AppDataSource.getRepository(User);
+
+       let { page, skip } = req.query;
+
+       let currentPage = page ? +page : 1;
+       let itemsPerPage = skip ? +skip : 3;
+
+       const [allUsers, count] = await userRepository.findAndCount({
+          skip: (currentPage - 1) * itemsPerPage,
+          take: itemsPerPage,
+          relations: {
+            role: true,
+            client: true,
+            artist: true,
+
+          },
+          select: {
+             username: true,
+             email: true,
+             id: true,
+             role: {
+              role_name: true,
+             },
+             client: {
+              phone_number: true,
+             },
+             artist: {
+              phone_number: true,
+             }
+          },
+       });
+       res.status(200).json({
+          count,
+          skip: itemsPerPage,
+          page: currentPage,
+          results: allUsers,
+       });
+    } catch (error) {
+       res.status(500).json({
+          message: "Error while getting users",
+       });
+    }
+ }
+
   async getById(req: Request, res: Response): Promise<void | Response<any>> {
     try {
       const id = +req.params.id;
