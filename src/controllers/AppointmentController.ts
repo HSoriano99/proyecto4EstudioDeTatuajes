@@ -109,4 +109,48 @@ export class AppointmentController {
     }
   }
 
+
+  async getAllPaginated(req: Request, res: Response): Promise<void | Response<any>> {
+    try {
+       const appointmentRepository = AppDataSource.getRepository(Appointment);
+
+       let { page, skip } = req.query;
+
+       let currentPage = page ? +page : 1;
+       let itemsPerPage = skip ? +skip : 3;
+
+       const [allAppointments, count] = await appointmentRepository.findAndCount({
+          skip: (currentPage - 1) * itemsPerPage,
+          take: itemsPerPage,
+          relations: {
+            client: true,
+            artist: true,
+          },
+          select: {
+             id: true,
+             date: true,
+             shift: true,
+             client: {
+              first_name: true,
+              phone_number: true,
+             },
+             artist: {
+              first_name: true,
+              phone_number: true,
+             }
+          },
+       });
+       res.status(200).json({
+          count,
+          skip: itemsPerPage,
+          page: currentPage,
+          results: allAppointments,
+       });
+    } catch (error) {
+       res.status(500).json({
+          message: "Error while getting users",
+       });
+    }
+ }
+
 }
