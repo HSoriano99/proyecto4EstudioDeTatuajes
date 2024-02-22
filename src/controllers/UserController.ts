@@ -88,6 +88,7 @@ export class UserController implements Controller {
 
 
 async delete(req: Request, res: Response): Promise<void | Response<any>> {
+  
   try {
      const id = +req.params.id;
 
