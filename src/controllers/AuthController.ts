@@ -440,6 +440,7 @@ export class AuthController {
       }
 
       const userArtist = Number(user.id);
+      
       const artistRepository = AppDataSource.getRepository(Artist);
       const artist = await artistRepository.findOneBy({
         user_id: userArtist

@@ -20,7 +20,6 @@ export const auth = (req: Request, res: Response, next: NextFunction) => {
       // Decodificar el token
       const decoded = jwt.verify(token, "123") as JwtPayload;
 
-      console.log(decoded);
 
       // Modificar el objeto Request con los datos del payload
 
