@@ -363,6 +363,11 @@ export class AuthController {
   async getClientByUser(req: Request, res: Response): Promise<void | Response<any>> {
     try {
 
+      let { page, skip } = req.query;
+
+       let currentPage = page ? +page : 1;
+       let itemsPerPage = skip ? +skip : 3;
+
       const id = +req.params.id;
 
       const userRepository = AppDataSource.getRepository(User);
@@ -387,8 +392,10 @@ export class AuthController {
       const clientId = Number(client?.id)
       
       const appointmentRepository = AppDataSource.getRepository(Appointment);
-      const appointment = await appointmentRepository.find({
+      const [allAppointments, count] = await appointmentRepository.findAndCount({
         where: {client_id: clientId},
+        skip: (currentPage - 1) * itemsPerPage,
+        take: itemsPerPage,
         relations: {
           artist:true
         },
@@ -409,7 +416,11 @@ export class AuthController {
       const response = {
         ...client,
         ...user,
-        appointment
+        count,
+          skip: itemsPerPage,
+          page: currentPage,
+          results: allAppointments
+        
       }
       //Reasigno el valor de response.id puesto que se pisa su valor con el método spread.
       response.id = client!.id
